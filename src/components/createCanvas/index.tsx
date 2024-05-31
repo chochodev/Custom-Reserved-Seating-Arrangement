@@ -5,7 +5,7 @@ const SeatingArrangement: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    const canvas = new fabric.Canvas(canvasRef.current);
+    const canvas = new fabric.Canvas(canvasRef.current as HTMLCanvasElement);
 
     // Define seating rows and columns
     const rows = 5;
@@ -23,11 +23,9 @@ const SeatingArrangement: React.FC = () => {
           fill: 'green',
           width: seatSize,
           height: seatSize,
-          selectable: false,
           hasControls: false,
         });
 
-        // Add click event to each seat
         seat.on('mousedown', () => {
           if (seat.fill === 'green') {
             seat.set('fill', 'red'); // Reserved
@@ -41,6 +39,15 @@ const SeatingArrangement: React.FC = () => {
         canvas.add(seat);
       }
     }
+
+    // Enable dragging for the seats
+    canvas.on('object:moving', (options) => {
+      const seat: any = options.target as fabric.Rect;
+      seat.set({
+        left: Math.round(seat.left / (seatSize + seatSpacing)) * (seatSize + seatSpacing),
+        top: Math.round(seat.top / (seatSize + seatSpacing)) * (seatSize + seatSpacing),
+      });
+    });
 
     // Clean up on unmount
     return () => {

@@ -6,7 +6,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<div>Home</div>} />
+        <Route path="/" element={<a href='/create'>Create</a>} />
         <Route path="/create" element={<CreatePage />} />
       </Routes>
     </Router>
