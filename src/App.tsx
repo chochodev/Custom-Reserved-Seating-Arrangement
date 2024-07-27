@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import CreatePage from './pages/create';
+import AddSeat from './pages/create';
 
 function App() {
 
@@ -7,7 +7,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<a href='/create'>Create</a>} />
-        <Route path="/create" element={<CreatePage />} />
+        <Route path="/create" element={<AddSeat />} />
       </Routes>
     </Router>
   )
